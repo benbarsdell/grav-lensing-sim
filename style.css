@@ -1,0 +1,73 @@
+
+body {
+  background-color: black;
+  color: #BBBBBB;
+  font-family: helvetica, arial, verdana, sans-serif;
+  text-align: center;
+}
+
+a:link    { color: #7777BB; }
+a:visited { color: #BB77BB; }
+a:hover   { color: #8888BB; }
+a:active  { color: #7777BB; }
+
+input[type="range"] {
+  width: 100%;
+}
+
+#main_canvas {
+  touch-action: none;
+}
+
+@media screen and (orientation: portrait) {
+  #content {
+    text-align: center;
+  }
+  #main_canvas {
+    width: 100%;
+  }
+  #display {
+    padding-left:  30px;
+    padding-right: 30px;
+  }
+  #controls {
+    padding-top:    20px;
+    padding-left:   13%;
+    padding-right:  13%;
+    padding-bottom: 50px;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  #content {
+    text-align: center;
+    display: inline-block;
+  }
+  #main_canvas {
+    height: 100%;
+  }
+  #display {
+    height: 85vh;
+    padding-left:  35px;
+    padding-right: 35px;
+    float: left;
+  }
+  #controls {
+    padding-right:  40px;
+    padding-bottom: 50px;
+    vertical-align: top;
+    text-align: left;
+    overflow: hidden;
+  }
+  @-moz-document url-prefix() {
+    @media only screen and (min-width: 900px) {
+    /*
+      TODO: For some reason, Firefox on desktop (not mobile!) doesn't work
+               properly unless something like this is specified.
+    */
+      #controls {
+        float: left;
+      }
+    }
+  }
+}

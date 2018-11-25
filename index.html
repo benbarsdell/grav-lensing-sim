@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Gravitational Lensing WebGL Demo</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" media="screen" href="style.css">
+
+<script type="text/javascript" src="webgl/glMatrix-0.js"></script>
+<script type="text/javascript" src="webgl/webgl-utils.js"></script>
+<script type="text/javascript" src="webgl/shader-util.js"></script>
+<script type="text/javascript" src="webgl/buffer-util.js"></script>
+<script type="text/javascript" src="webgl/texture-util.js"></script>
+
+<script type="text/javascript" src="main.js"></script>
+<script type="x-shader/x-vertex"   src="inverse_shear_mapping.vert" id="inverse_shear_mapping-vert"></script>
+<script type="x-shader/x-fragment" src="simple.frag" id="simple-frag"></script>
+<script type="x-shader/x-vertex"   src="simple.vert" id="simple-vert"></script>
+<script type="x-shader/x-fragment" src="image_warp.frag" id="image_warp-frag"></script>
+</head>
+
+<body onload="main();">
+<h1>Gravitational Lensing</h1>
+<h4>An interactive simulation of gravitational lensing effects using WebGL</h4>
+<h5>
+  Best viewed in <a href="http://www.google.com/chrome">Chrome</a>.
+  Browse <a href="https://github.com/benbarsdell/grav-lensing-sim">the code</a> or
+  learn more about <a href="https://oneminuteastronomer.com/9237/gravitational-lens/">the topic</a>,
+  a <a href="http://www.phys.canterbury.ac.nz/moa/demonstration.html">practical demonstration</a>,
+  <a href="https://en.wikipedia.org/wiki/Gravitational_lensing_formalism">the math</a>,
+  or the <a href="http://iopscience.iop.org/article/10.1086/508796">paper</a> that inspired it.
+</h5>
+
+<div id="content">
+<div id="display">
+  <canvas id="main_canvas"></canvas>
+</div>
+<div id="controls">
+  <button id="MagModeButton" type="button">Magnification map</button>
+  <button id="ImgModeButton" type="button">Observed image</button>
+  <p>
+    <label>No. lenses:<input id="LensCount" min="0" max="256" value="3" type="number" onfocus="this.select()"></label><br>
+    <label><input id="MoveAllLensesCheckbox" type="checkbox">Move all lenses</label>
+  </p>
+  <p>Lens mass:<br>
+    <input id="MassSlider" min="0" max="6.0" value="0.5" step="0.075" type="range">
+  </p>
+  <p>
+    Convergence in continuous matter (&kappa;<sub>c</sub>):<br>
+    <input id="KappaCSlider" min="0.0" max="1.0" value="0.0" step="0.0125" type="range">
+  </p>
+  <p>
+    Shear in continuous matter (&gamma;<sub>c</sub>):<br>
+    <input id="GammaCSlider" min="-1.0" max="1.0" value="0.0" step="0.025" type="range" list="GammaCTicks">
+    <datalist id="GammaCTicks">
+        <option>0</option>
+    </datalist>
+  </p>
+  <p>
+    <label>Render resolution:</label>
+    <select id="RenderResolutionSelect">
+      <option value="256">256</option>
+      <option value="512">512</option>
+      <option value="1024" selected>1024</option>
+      <option value="2048">2048</option>
+      <option value="4096">4096</option>
+    </select>
+  </p>
+  <p>
+    <label>Mesh resolution:</label>
+    <select id="MeshResolutionSelect">
+      <option value="128">128</option>
+      <option value="256">256</option>
+      <option value="512">512</option>
+      <option value="1024" selected>1024</option>
+      <option value="2048">2048</option>
+      <option value="4096">4096 (!)</option>
+    </select>
+  </p>
+  <label><input id="WireframeCheckbox" type="checkbox">Wireframe rendering</label>
+</div><!-- controls -->
+</div><!-- content -->
+</body>
+</html>
